@@ -1,0 +1,48 @@
+export default () => ({
+  UPLOAD_PATH: {
+    PROPERTY_IMAGES: 'PROPERTY_IMAGES',
+    DRAFT_PROPERTIES: 'DRAFT_PROPERTIES',
+    PROPERTY_VIDEOS: 'PROPERTY_VIDEOS',
+    AGENT_MAIN_IMAGE: 'AGENT_MAIN_IMAGE',
+    AGENT_BUSINESS_LOGO: 'AGENT_BUSINESS_LOGO',
+  },
+
+  DB_COLLECTION: {
+    USER: 'USER',
+    PROPERTY: 'PROPERTY',
+    INSIGHT: 'INSIGHT',
+  },
+
+  MESSAGES: {
+    USER_EXIST: 'User already exists',
+    USER_CREATED: 'User created successfully',
+    USER_LOGGED: 'User logged in successfully',
+    USER_LOGGED_OUT: 'User logged out in successfully',
+    USER_UPDATED: 'User updated successfully',
+    USER_NOT_EXIST: 'User does not exist',
+    USER_ACTIVITY_GOTTEN: 'User activities gotten successfully',
+    JOB_CREATED: 'New Job Post created successfully',
+    UPLOADED: 'Upload Successful',
+    CONFIRM_EMAIL: 'Please confirm email',
+    EMAIL_CONFIRMED: 'Your email have been confirmed',
+    ALREADY_EXIST: 'Resource already exists',
+    ALREADY_VERIFIED: 'User has already been verified',
+    CREATED: 'Resource created successfully',
+    FETCHED: 'Resource fetched',
+    UPDATED: 'Resource updated successfully',
+    DELETED: 'Resource deleted successfully',
+    NOT_FOUND: 'Not found',
+    MISSING_FIELDS: 'Please fill in the missing fields',
+    INVALID_CREDENTIALS: 'Invalid credentials',
+    INVALID_TOKEN: 'Invalid token',
+    INVALID_PASSWORD: 'Invalid password',
+    TOKEN_VERIFIED: 'Token verified successfully',
+    OTP_MESSAGE: 'Hello, your BBWE verification code is',
+    OTP_SENT: 'OTP Sent',
+    PASSWORD_MISMATCH: 'Password mismatch detected',
+    PASSWORD_RESET_EMAIL_SENT:
+      'The reset password link has been sent to your email address',
+    PASSWORD_RESET_SUCCESS: 'Password reset successful',
+    PROPERTY_CREATED: 'You have successfully created a property',
+  },
+});
