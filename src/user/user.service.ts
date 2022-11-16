@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Team, TeamDocument } from './model/team.model';
+import { Team, TeamDocument } from '../team/entities/team.model';
 
 @Injectable()
 export class UserService {

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Role, RoleSchema } from '../../auth/role.model';
+import { Role, RoleSchema } from '../../role/model/role.model';
 
 @Schema()
 export class Address {
@@ -18,7 +18,7 @@ export const AddressSchema = SchemaFactory.createForClass(Address);
 @Schema({ timestamps: true })
 export class Team {
   @Prop()
-  firsntName: string;
+  firstName: string;
 
   @Prop()
   lastName: string;
@@ -42,7 +42,7 @@ export class Team {
   bio: string;
 
   @Prop()
-  id: string;
+  idCard: string;
 
   @Prop({ type: AddressSchema })
   address: Address;

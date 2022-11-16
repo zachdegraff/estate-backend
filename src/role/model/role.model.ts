@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
 @Schema({ timestamps: true })
 export class Role {
-  @Prop()
+  @Prop({ unique: true })
   name: string;
 
   @Prop()
@@ -12,4 +13,5 @@ export class Role {
   description: string;
 }
 
+export type RoleDocument = Role & Document;
 export const RoleSchema = SchemaFactory.createForClass(Role);

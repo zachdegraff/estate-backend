@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Team, TeamSchema } from 'src/user/model/team.model';
+import { TeamModule } from 'src/team/team.module';
 import { BusinessController } from './business.controller';
 import { BusinessService } from './business.service';
 import { Business, BusinessSchema } from './model/business.model';
@@ -10,7 +10,7 @@ import { Business, BusinessSchema } from './model/business.model';
     MongooseModule.forFeature([
       { name: Business.name, schema: BusinessSchema },
     ]),
-    MongooseModule.forFeature([{ name: Team.name, schema: TeamSchema }]),
+    TeamModule,
   ],
   providers: [BusinessService],
   exports: [BusinessService],

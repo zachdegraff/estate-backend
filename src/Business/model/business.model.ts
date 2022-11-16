@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Team, TeamSchema } from '../../user/model/team.model';
+import { Team, TeamSchema } from '../../team/entities/team.model';
 
 @Schema({ timestamps: true })
 export class Business {

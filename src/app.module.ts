@@ -7,6 +7,8 @@ import { BusinessModule } from './Business/business.module';
 import configurations from './config/configurations';
 import { MongooseConfigService } from './db/mongoose.config';
 import { UserModule } from './user/user.module';
+import { TeamModule } from './team/team.module';
+import { RoleModule } from './role/role.module';
 
 @Module({
   imports: [
@@ -19,6 +21,8 @@ import { UserModule } from './user/user.module';
     }),
     UserModule,
     BusinessModule,
+    TeamModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,31 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Team, TeamDocument } from 'src/user/model/team.model';
+import { CreateTeamDto } from 'src/team/dto/create-team.dto';
+import { TeamService } from 'src/team/team.service';
+import { CreateBusinessDto } from './dtos/business.dto';
 import { Business, BusinessDocument } from './model/business.model';
 
 @Injectable()
 export class BusinessService {
-  /**
-   *
-   * @param businessModel
-   * @param teamModel
-   * TODO
-   * Delegate the team creation to the team service... pass the data and accept response
-   * Remove the model from business module
-   */
   constructor(
     @InjectModel(Business.name) private businessModel: Model<BusinessDocument>,
-    @InjectModel(Team.name) private teamModel: Model<TeamDocument>,
+    private teamService: TeamService,
   ) {}
 
-  async createBusiness(data: any) {
-    const owner = new Team();
-    owner.firsntName = data.firsntName;
-    owner.lastName = data.lastName;
-    owner.email = data.email;
+  async createBusiness(data: CreateBusinessDto) {
+    const owner: CreateTeamDto = data.owner;
+    console.log('creating Owner');
 
-    await this.teamModel.create(owner);
+    await this.teamService.create(owner);
     return await this.businessModel.create({ ...data, owner });
   }
 }
