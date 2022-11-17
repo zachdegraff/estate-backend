@@ -20,6 +20,11 @@ export class RoleController {
     return this.roleService.create(createRoleDto);
   }
 
+  @Get('/name')
+  getByName(@Body() name: string) {
+    return this.roleService.findByName(name);
+  }
+
   @Get()
   findAll() {
     return this.roleService.findAll();

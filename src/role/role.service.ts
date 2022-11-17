@@ -16,6 +16,9 @@ export class RoleService {
     return `This action returns all role`;
   }
 
+  async findByName(name: string): Promise<RoleDocument> {
+    return this.roleModel.findOne({ name });
+  }
   async findOne(id: number) {
     return `This action returns a #${id} role`;
   }

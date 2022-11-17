@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { Role, RoleSchema } from '../../role/model/role.model';
 
@@ -47,8 +47,13 @@ export class Team {
   @Prop({ type: AddressSchema })
   address: Address;
 
-  @Prop({ type: RoleSchema })
-  role: Role;
+  @Prop(
+    raw({
+      name: { type: String },
+      permissions: { type: [String] },
+    }),
+  )
+  role: Record<string, any>;
 }
 
 export type TeamDocument = Team & Document;

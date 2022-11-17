@@ -1,10 +1,12 @@
-import { IsString } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsArray, IsString } from 'class-validator';
 
 export class CreateRoleDto {
   @IsString()
+  @Transform(({ value }) => String(value).toUpperCase())
   name: string;
 
-  @IsString()
+  @IsArray()
   permissions: [string];
 
   @IsString()

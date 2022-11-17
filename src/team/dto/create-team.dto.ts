@@ -7,6 +7,7 @@ import {
   MinLength,
   ValidateNested,
 } from 'class-validator';
+import { Role } from 'src/role/model/role.model';
 import { Address } from '../entities/team.model';
 
 export class CreateTeamDto {
