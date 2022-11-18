@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { TeamService } from './team.service';
-import { CreateTeamDto } from './dto/create-team.dto';
+import { CreateTeamDto, IsEmailDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 
 @Controller('team')
@@ -16,8 +16,8 @@ export class TeamController {
   constructor(private readonly teamService: TeamService) {}
 
   @Post()
-  create(@Body() createTeamDto: CreateTeamDto) {
-    return this.teamService.create(createTeamDto);
+  async create(@Body() createTeamDto: CreateTeamDto) {
+    return await this.teamService.create(createTeamDto);
   }
 
   @Get()
@@ -25,9 +25,14 @@ export class TeamController {
     return this.teamService.findAll();
   }
 
+  @Get('email')
+  async getByEmail(@Body() data: IsEmailDto) {
+    return await this.teamService.findByEmail(data);
+  }
+
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.teamService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    return await this.teamService.findById(id);
   }
 
   @Patch(':id')

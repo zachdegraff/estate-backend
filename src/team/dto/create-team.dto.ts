@@ -52,3 +52,10 @@ export class CreateTeamDto {
   @ValidateNested()
   address: Address;
 }
+
+export class IsEmailDto {
+  @IsEmail()
+  @IsNotEmpty()
+  @Transform(({ value }) => String(value).toLowerCase())
+  email: string;
+}

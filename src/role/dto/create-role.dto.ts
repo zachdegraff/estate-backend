@@ -12,3 +12,9 @@ export class CreateRoleDto {
   @IsString()
   description: string;
 }
+
+export class RawRole {
+  name: string;
+
+  permissions: [string];
+}

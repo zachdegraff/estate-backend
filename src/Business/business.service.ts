@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Role, RoleDocument } from 'src/role/model/role.model';
@@ -17,28 +21,46 @@ export class BusinessService {
   ) {}
 
   async createBusiness(data: CreateBusinessDto) {
-    const businessExist = await this.findByName(data.businessName);
+    const { businessName, owner } = data;
+    const businessExist = await this.findByName(businessName);
+
     if (businessExist) {
       throw new BadRequestException(
         'This business has already been registered',
       );
     }
-    const owner: CreateTeamDto & { role: object } = data.owner;
+
     const role = await this.roleService.findByName('BUSINESS_OWNER');
     if (!role) {
       throw new BadRequestException('Role does not exist');
     }
-
     owner.role = { name: role.name, permissions: role.permissions };
 
-    console.log(owner);
-
-    await this.teamService.create(owner);
-
-    return await this.businessModel.create({ ...data, owner });
+    const { password, ...theOwner } = (
+      await this.teamService.create(owner)
+    ).toObject();
+    return await this.businessModel.create({ businessName, owner: theOwner });
   }
 
-  async findByName(name: string) {
-    return await this.businessModel.findOne({ name });
+  async findByName(businessName: string) {
+    return await this.businessModel.findOne({ businessName });
+  }
+
+  async findById(id: string) {
+    console.log(id);
+    return await this.businessModel.findById(id);
+  }
+
+  async findAll() {
+    return await this.businessModel.find({});
+  }
+
+  async findByOwner(ownerId: string) {
+    const res = await this.businessModel.findOne({ 'owner._id': ownerId });
+    if (!res) {
+      throw new NotFoundException('Business For this owner does not exist');
+    }
+
+    return res;
   }
 }

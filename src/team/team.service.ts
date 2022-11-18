@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateTeamDto } from './dto/create-team.dto';
+import { CreateTeamDto, IsEmailDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { Team, TeamDocument } from './entities/team.model';
 
@@ -14,12 +14,18 @@ export class TeamService {
     return this.teamModel.create(createTeamDto);
   }
 
-  findAll() {
-    return `This action returns all team`;
+  async findAll() {
+    return await this.teamModel.find({});
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} team`;
+  async findById(id: string) {
+    console.log('in find oone');
+
+    return await this.teamModel.findById(id);
+  }
+
+  async findByEmail(email: IsEmailDto) {
+    return await this.teamModel.findOne({ email: email.email });
   }
 
   update(id: number, updateTeamDto: UpdateTeamDto) {

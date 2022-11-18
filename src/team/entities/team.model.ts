@@ -1,5 +1,9 @@
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { type } from 'os';
+import { identity } from 'rxjs';
+import { RawRole } from 'src/role/dto/create-role.dto';
+import { IRole } from 'src/role/interfaces/role.interfaces';
 import { Role, RoleSchema } from '../../role/model/role.model';
 
 @Schema()
@@ -15,7 +19,7 @@ export class Address {
 }
 export const AddressSchema = SchemaFactory.createForClass(Address);
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, autoIndex: true })
 export class Team {
   @Prop()
   firstName: string;
@@ -23,7 +27,9 @@ export class Team {
   @Prop()
   lastName: string;
 
-  @Prop()
+  @Prop({
+    unique: true,
+  })
   email: string;
 
   @Prop()
@@ -44,17 +50,14 @@ export class Team {
   @Prop()
   idCard: string;
 
-  @Prop({ type: AddressSchema })
+  @Prop({ type: AddressSchema, _id: false })
   address: Address;
 
-  @Prop(
-    raw({
-      name: { type: String },
-      permissions: { type: [String] },
-    }),
-  )
-  role: Record<string, any>;
+  @Prop({ type: RawRole })
+  role: RawRole;
 }
-
 export type TeamDocument = Team & Document;
 export const TeamSchema = SchemaFactory.createForClass(Team);
+
+// TODO
+// Save owner as object identity..
