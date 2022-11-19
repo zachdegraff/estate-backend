@@ -32,6 +32,9 @@ export class Team {
   })
   email: string;
 
+  @Prop({ default: false })
+  isEmailVerified: boolean;
+
   @Prop()
   password: string;
 

@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
+import { RoleGuard } from 'src/auth/guard/role.guard';
 import { RoleModule } from 'src/role/role.module';
 import { TeamModule } from 'src/team/team.module';
 import { BusinessController } from './business.controller';
@@ -14,7 +16,13 @@ import { Business, BusinessSchema } from './model/business.model';
     TeamModule,
     RoleModule,
   ],
-  providers: [BusinessService],
+  providers: [
+    BusinessService,
+    {
+      provide: 'APP_GUARD',
+      useClass: JwtAuthGuard,
+    },
+  ],
   exports: [BusinessService],
   controllers: [BusinessController],
 })

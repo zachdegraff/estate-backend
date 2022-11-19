@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 import { Team, TeamSchema } from '../../team/entities/team.model';
 
 @Schema({ timestamps: true })
@@ -13,8 +13,8 @@ export class Business {
   @Prop({ unique: true })
   businessName: string;
 
-  @Prop({ type: TeamSchema })
-  owner: Team;
+  @Prop({ type: Types.ObjectId, ref: 'Team' })
+  owner: string;
 }
 
 export type BusinessDocument = Business & Document;

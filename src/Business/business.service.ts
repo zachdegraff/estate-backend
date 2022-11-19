@@ -4,11 +4,12 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Role, RoleDocument } from 'src/role/model/role.model';
 import { RoleService } from 'src/role/role.service';
 import { CreateTeamDto } from 'src/team/dto/create-team.dto';
 import { TeamService } from 'src/team/team.service';
+import { convertId } from 'src/utils/convertId';
 import { CreateBusinessDto } from './dtos/business.dto';
 import { Business, BusinessDocument } from './model/business.model';
 
@@ -22,24 +23,12 @@ export class BusinessService {
 
   async createBusiness(data: CreateBusinessDto) {
     const { businessName, owner } = data;
-    const businessExist = await this.findByName(businessName);
-
-    if (businessExist) {
-      throw new BadRequestException(
-        'This business has already been registered',
-      );
-    }
-
-    const role = await this.roleService.findByName('BUSINESS_OWNER');
-    if (!role) {
-      throw new BadRequestException('Role does not exist');
-    }
-    owner.role = { name: role.name, permissions: role.permissions };
-
-    const { password, ...theOwner } = (
-      await this.teamService.create(owner)
-    ).toObject();
-    return await this.businessModel.create({ businessName, owner: theOwner });
+    await this.chekBusinessNameUnique(businessName);
+    const user = await this.teamService.createTeam(owner, 'BUSINESS_OWNER');
+    return await this.businessModel.create({
+      businessName,
+      owner: user._id,
+    });
   }
 
   async findByName(businessName: string) {
@@ -56,11 +45,22 @@ export class BusinessService {
   }
 
   async findByOwner(ownerId: string) {
-    const res = await this.businessModel.findOne({ 'owner._id': ownerId });
+    const id = convertId(ownerId);
+    const res = await this.businessModel.findOne({ owner: id }).exec();
     if (!res) {
       throw new NotFoundException('Business For this owner does not exist');
     }
 
     return res;
+  }
+
+  // ---------- PRIATE  METHODS
+  private async chekBusinessNameUnique(name: string) {
+    const businessExist = await this.findByName(name);
+    if (businessExist) {
+      throw new BadRequestException(
+        'This business has already been registered',
+      );
+    }
   }
 }

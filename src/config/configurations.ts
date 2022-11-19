@@ -5,6 +5,7 @@ export default () => ({
   jwtSecret: process.env.JWT_SECRET,
   baseUrl: process.env.BASE_URL,
   frontendUrl: process.env.FRONTEND_URL,
+  jwtExpiration: process.env.JWT_EXPIRATION,
 
   email: {
     user: process.env.EMAIL_USER,
