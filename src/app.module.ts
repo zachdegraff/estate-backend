@@ -9,6 +9,7 @@ import { MongooseConfigService } from './db/mongoose.config';
 import { UserModule } from './user/user.module';
 import { TeamModule } from './team/team.module';
 import { RoleModule } from './role/role.module';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { RoleModule } from './role/role.module';
     BusinessModule,
     TeamModule,
     RoleModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [AppService],

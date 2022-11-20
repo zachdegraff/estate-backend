@@ -1,30 +1,35 @@
 import { MailerModule } from '@nestjs-modules/mailer';
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { join } from 'path';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { MailService } from './mail.service';
+import { ConfigService } from '@nestjs/config';
 
+@Global()
 @Module({
   imports: [
-    MailerModule.forRoot({
-      transport: {
-        host: 'server136.web-hosting.com',
-        port: 465,
-        auth: {
-          user: 'feyi@realhaven.homes',
-          pass: 'RealHaven11#',
+    MailerModule.forRootAsync({
+      useFactory: async (config: ConfigService) => ({
+        transport: {
+          host: config.get('email').host,
+          port: config.get('email').port,
+          auth: {
+            user: config.get('email').user,
+            pass: config.get('email').pass,
+          },
         },
-      },
-      defaults: {
-        from: '"Feyisayo" <feyi@realhaven.homes>',
-      },
-      template: {
-        dir: join(__dirname, 'templates'),
-        adapter: new HandlebarsAdapter(),
-        options: {
-          strict: true,
+        defaults: {
+          from: `"Real Haven" <${config.get('email').from}>`,
         },
-      },
+        template: {
+          dir: join(__dirname, 'templates'),
+          adapter: new HandlebarsAdapter(),
+          options: {
+            strict: true,
+          },
+        },
+      }),
+      inject: [ConfigService],
     }),
   ],
   providers: [MailService],

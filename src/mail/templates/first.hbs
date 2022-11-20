@@ -1,7 +1,191 @@
-<p>Hey {{ firstName }},</p>
-<p>Please click below to confirm your email</p>
-<p>
-    <a href="www.realhaven.homes">Confirm</a>
-</p>
+<!DOCTYPE html>
+<html lang="en">
 
-<p>If you did not request this email you can safely ignore it.</p>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap');
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.headDiv {
+    width: 100%;
+    height: 120px;
+    background: #F9FAFB;
+    text-align: center;
+}
+
+.mailHead {
+    padding-top: 50px;
+    font-family: 'Sora';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    color: #2E7DD7
+}
+
+.mailHead img {
+    margin-right: 10px;
+}
+
+.theMain {
+    background-color: white;
+    padding-top: 48px;
+    padding-bottom: 40px;
+    padding-left: 10%;
+    border-bottom: 1px solid #D1D5DB;
+}
+
+.theName {
+    font-family: 'Sora';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #374151;
+    width: 80%;
+}
+
+.theContent {
+    font-family: 'Sora';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #6B7280;
+    width: 80%;
+}
+
+.theButton {
+    width: 300px;
+    height: 52px;
+    background: #2E7DD7;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-family: 'Sora';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.theButton a {
+    text-decoration: none;
+    color: white;
+}
+
+.theSect {
+    background-color: white;
+    padding-top: 48px;
+    padding-bottom: 40px;
+    padding-left: 10%;
+    font-family: 'Sora';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #6B7280;
+}
+
+.theSect p {
+    width: 80%;
+}
+
+.theSect a,
+.theMain>ul>li>p>a,
+.theFooter a {
+    color: #2E7DD7;
+}
+
+.theFooter {
+    background-color: #F9FAFB;
+    padding-bottom: 10px;
+    padding-left: 10%;
+}
+
+.theFooter p {
+    font-family: 'Sora';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #6B7280;
+}
+
+.conDiv {
+    background-color: #EAF2FB;
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+    </style>
+</head>
+
+<body>
+    <div class="headDiv">
+        <div class="mailHead">
+            <img src="https://res.cloudinary.com/a244341167/image/upload/v1659553449/HAVEN/logo/haven_logo_u8olw4.png"
+                alt="logo">HAVEN
+        </div>
+    </div>
+
+    <div class="conDiv">
+        <img src="https://res.cloudinary.com/a244341167/image/upload/v1660642468/HAVEN/logo/head_w9awu5.png" alt="Welcome Logo">
+    </div>
+
+    <div class="theMain">
+        <p class="theName">Welcome to Haven, {{firstName}}!</p>
+        <p class="theName" style="width: 80%; font-size: 14px;">Thank you for signing up, We are all very excited to
+            have you 😊
+        </p>
+        <p class="theContent">Haven connects agents with people to help them find their next home/real estate
+            property. We are built on trust,
+            transparency and support. In the last year alone, Haven has helped more than 1 million people find best
+            properties to
+            buy in NIgeria.</p>
+        <button class="theButton" style="margin-top: 20px;"><a href="#">View all properties</a></button>
+    </div>
+    <div class="theMain">
+        <p class="theName">Get started in a few steps:</p>
+        <ul>
+            <li>
+                <p class="theContent">Starting viewing all available properties at <a
+                        href="https://realhaven.herokuapp.com">https://realhaven.herokuapp.com</a></p>
+            </li>
+            <li>
+                <p class="theContent">Have some properties to sell? <a
+                        href="https://realhaven.herokuapp.com/register">Join us as an agent</a> and we’ll get you
+                    all set up with all the tools you might need to run
+                    a succesfully agency.</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="theSect">
+        <p>🤞 Rejoice & the Haven team</p>
+        <p>Need help? <a href="">Contact our support team</a> or hit us up on Twitter <a href="">@Haven_HQ</a></p>
+        <p>Want to give us feedback? Let us know what you think on our <a href="">Feedback site</a></p>
+    </div>
+    <footer class="theFooter">
+        <div style="justify-content: flex-start;" class="mailHead"><img
+                src="https://res.cloudinary.com/a244341167/image/upload/v1659553449/HAVEN/logo/haven_logo_u8olw4.png"
+                alt="logo">HAVEN</div>
+        <p>Haven real estate agency</p>
+        <p>Addresses</p>
+        <p>This email was intended for Rejoice. <a href="">Unsubscribe</a></p>
+    </footer>
+</body>
+
+</html>

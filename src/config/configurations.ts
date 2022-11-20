@@ -8,9 +8,11 @@ export default () => ({
   jwtExpiration: process.env.JWT_EXPIRATION,
 
   email: {
-    user: process.env.EMAIL_USER,
-    password: process.env.EMAIL_PASSWORD,
-    apiKey: process.env.SEND_BLUE_API_KEY,
+    host: process.env.MAIL_HOST,
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+    port: process.env.MAIL_PORT,
+    from: process.env.MAIL_FROM,
   },
 
   cloudinary: {

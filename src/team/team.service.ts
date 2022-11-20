@@ -9,8 +9,6 @@ import { CryptoService } from 'src/auth/crypto/crypto.service';
 import { LoginDto } from 'src/auth/dto/auth.dto';
 import { MailService } from 'src/mail/mail.service';
 import { RoleService } from 'src/role/role.service';
-import { SendBlueConstants } from 'src/shared/sendblue/interface/constants';
-import { SendBlueService } from 'src/shared/sendblue/services/sendblue.service';
 import { CreateTeamDto, IsEmailDto } from './dto/create-team.dto';
 import { UpdateTeamDto } from './dto/update-team.dto';
 import { Team, TeamDocument } from './entities/team.model';
@@ -21,7 +19,6 @@ export class TeamService {
     @InjectModel(Team.name) private teamModel: Model<TeamDocument>,
     private readonly crypto: CryptoService,
     private roleService: RoleService,
-    private mailSender: SendBlueService,
     private mailService: MailService,
   ) {}
 
@@ -34,16 +31,7 @@ export class TeamService {
       role,
       password,
     });
-    // await this.mailSender.send({
-    //   to: team.email,
-    //   template: SendBlueConstants.templateId.WELCOME_EMAIL,
-    //   data: {
-    //     firstName: team.firstName,
-    //   },
-    // });
-
     await this.mailService.sendUserWelcome(team.firstName, team.email);
-
     return team;
   }
 
@@ -65,9 +53,6 @@ export class TeamService {
 
   // -----------------------PRIVATE METHODS --------------
 
-  private async sendEmail(data: any) {
-    await this.mailSender.send(data);
-  }
   private async getRole(name: string) {
     const role = await this.roleService.findByName(name);
     if (!role) {
