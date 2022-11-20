@@ -10,6 +10,7 @@ export default () => ({
   email: {
     user: process.env.EMAIL_USER,
     password: process.env.EMAIL_PASSWORD,
+    apiKey: process.env.SEND_BLUE_API_KEY,
   },
 
   cloudinary: {
