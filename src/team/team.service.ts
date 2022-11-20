@@ -26,12 +26,14 @@ export class TeamService {
     await this.isEmailUnique(createTeamDto.email);
     const role = await this.getRole(teamRole);
     const password = await this.crypto.hashPassword(createTeamDto.password);
+
     const team = await this.teamModel.create({
       ...createTeamDto,
       role,
       password,
     });
-    await this.mailService.sendUserWelcome(team.firstName, team.email);
+    // Make this go async
+    this.mailService.sendUserWelcome(team.firstName, team.email);
     return team;
   }
 
@@ -58,6 +60,7 @@ export class TeamService {
     if (!role) {
       throw new BadRequestException('Role does not exist');
     }
+
     return { name: role.name, permissions: role.permissions };
   }
 

@@ -6,7 +6,11 @@ import { JwtService } from '@nestjs/jwt';
 export class CryptoService {
   constructor(private jwt: JwtService) {}
   async hashPassword(password: string) {
+    console.log(`STARTED HASH PASSWORD team method, ${new Date()}`);
+
     const salt = await bcrypt.genSalt(10);
+    console.log(`ENDED HASH team method, ${new Date()}`);
+
     return await bcrypt.hash(password, salt);
   }
 
