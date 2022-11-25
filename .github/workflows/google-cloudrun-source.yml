@@ -48,12 +48,12 @@ name: Deploy to Cloud Run from Source
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
 
 env:
-  PROJECT_ID:  realhaven
+  PROJECT_ID: realhaven
   SERVICE: haven-api
-  REGION:  us-central1
+  REGION: us-central1
 
 jobs:
   deploy:
@@ -85,8 +85,8 @@ jobs:
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v0
         env:
-         JWT_SECRET: secret
-         DATABASE_URI: mongodb+srv://root:mongo@firstnodeproject.g442jly.mongodb.net/RealHaven?retryWrites=true&w=majority
+          JWT_SECRET: secret
+          DATABASE_URI: mongodb+srv://root:mongo@firstnodeproject.g442jly.mongodb.net/RealHaven?retryWrites=true&w=majority
         with:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
