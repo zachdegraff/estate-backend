@@ -1,8 +1,8 @@
 export default () => ({
   port: parseInt(process.env.PORT) || 8080,
   appName: process.env.APP_NAME,
-  databaseUrl: process.env.DATABASE_URI,
-  jwtSecret: process.env.JWT_SECRET,
+  databaseUrl: process.env.DATABASE_URI || 'localhost:27017',
+  jwtSecret: process.env.JWT_SECRET || 'secret',
   baseUrl: process.env.BASE_URL,
   frontendUrl: process.env.FRONTEND_URL,
   jwtExpiration: process.env.JWT_EXPIRATION,
