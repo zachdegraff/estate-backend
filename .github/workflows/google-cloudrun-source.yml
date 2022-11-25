@@ -84,6 +84,9 @@ jobs:
       - name: Deploy to Cloud Run
         id: deploy
         uses: google-github-actions/deploy-cloudrun@v0
+        env:
+         JWT_SECRET: secret
+         DATABASE_URI: mongodb+srv://root:mongo@firstnodeproject.g442jly.mongodb.net/RealHaven?retryWrites=true&w=majority
         with:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
