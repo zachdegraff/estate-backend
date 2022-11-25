@@ -92,6 +92,7 @@ jobs:
             DATABASE_URI=mongodb+srv://root:mongo@firstnodeproject.g442jly.mongodb.net/RealHaven?retryWrites=true&w=majority
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
+          flags: '--allow-unauthenticated'
           # NOTE: If required, update to the appropriate source folder
           source: ./
 
