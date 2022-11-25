@@ -13,7 +13,7 @@ export class RoleService {
   }
 
   async findAll() {
-    return `This action returns all role`;
+    return `This action returns the all role`;
   }
 
   async findByName(name: string): Promise<RoleDocument> {
