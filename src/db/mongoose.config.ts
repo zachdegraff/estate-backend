@@ -11,6 +11,9 @@ export class MongooseConfigService implements MongooseOptionsFactory {
   createMongooseOptions():
     | MongooseModuleOptions
     | Promise<MongooseModuleOptions> {
+    console.log(this.config.get('databaseUrl'));
+    console.log(this.config.get('jwtExpiration'));
+
     return {
       uri: this.config.get('databaseUrl'),
     };
