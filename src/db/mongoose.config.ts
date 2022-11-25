@@ -11,11 +11,8 @@ export class MongooseConfigService implements MongooseOptionsFactory {
   createMongooseOptions():
     | MongooseModuleOptions
     | Promise<MongooseModuleOptions> {
-    console.log(this.config.get('databaseUrl'));
-    console.log(this.config.get('jwtExpiration'));
-
     return {
-      uri: `mongodb+srv://root:mongo@firstnodeproject.g442jly.mongodb.net/RealHaven?retryWrites=true&w=majority`,
+      uri: this.config.get('databaseUrl'),
     };
   }
 }
